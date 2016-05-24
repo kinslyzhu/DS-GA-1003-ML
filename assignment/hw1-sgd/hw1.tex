@@ -1,0 +1,976 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{logging}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.cross\PYZus{}validation} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{init}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{c}{\PYZsh{}Loading the dataset}
+            \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{loading the dataset}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{hw1\PYZhy{}data.csv}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{,}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        
+            \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Split into Train and Test}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+            \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}
+        \PY{c}{\PYZsh{}!\PYZhy{}\PYZhy{}\PYZhy{}init\PYZhy{}\PYZhy{}\PYZhy{}!}
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{init}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+loading the dataset
+Split into Train and Test
+    \end{Verbatim}
+
+    \section{2. Linear Regression}\label{linear-regression}
+
+    \subsection{2.1 Feature Normalization}\label{feature-normalization}
+
+Modify function \texttt{feature\_normalization} to normalize all the
+features to {[}0,1{]}.
+
+\begin{quote}
+Answer:
+\end{quote}
+
+\begin{quote}
+Min-Max Scaling is used to normalize all the features.
+\end{quote}
+
+\begin{quote}
+\(X_{norm} = \frac{X-X_{min}}{X_{max}-X_{min}}\)
+\end{quote}
+
+\begin{quote}
+When subtracting vector \(X_{min}\) from matrix \(X\), and dividing
+\(X_{max}-X_{min}\), Numpy's ``broadcasting'' is used.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}Q2.1: Normalization}
+        \PY{k}{def} \PY{n+nf}{feature\PYZus{}normalization}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{test}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Rescale the data so that each feature in the training set is in}
+        \PY{l+s+sd}{    the interval [0,1], and apply the same transformations to the test}
+        \PY{l+s+sd}{    set, using the statistics computed on the training set.}
+        
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        train \PYZhy{} training set, a 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+        \PY{l+s+sd}{        test  \PYZhy{} test set, a 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        train\PYZus{}normalized \PYZhy{} training set after normalization}
+        \PY{l+s+sd}{        test\PYZus{}normalized  \PYZhy{} test set after normalization}
+        
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c}{\PYZsh{} Min\PYZhy{}Max Scaling}
+            \PY{n}{train\PYZus{}min} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{train}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{train\PYZus{}max} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{train}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{return} \PY{p}{(}\PY{n}{train}\PY{o}{\PYZhy{}}\PY{n}{train\PYZus{}min}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{train\PYZus{}max} \PY{o}{\PYZhy{}} \PY{n}{train\PYZus{}min}\PY{o}{+}\PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{test}\PY{o}{\PYZhy{}}\PY{n}{train\PYZus{}min}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{train\PYZus{}max} \PY{o}{\PYZhy{}} \PY{n}{train\PYZus{}min}\PY{o}{+}\PY{l+m+mf}{0.0}\PY{p}{)} 
+        
+        \PY{c}{\PYZsh{}!\PYZhy{}\PYZhy{}\PYZhy{}Scale\PYZhy{}\PYZhy{}\PYZhy{}!}
+        
+        \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Scaling all to [0, 1]}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{feature\PYZus{}normalization}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{)}
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}  \PY{c}{\PYZsh{} Add bias term}
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} Add bias term}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Scaling all to [0, 1]
+    \end{Verbatim}
+
+    \subsection{2.2 Gradient Descent Setup}\label{gradient-descent-setup}
+
+    1.Write the objective function \(J(\theta)\) as a matrix/vector
+expression, without using an explicit summation sign.
+
+    \begin{quote}
+\textbf{ANSWER:}
+\end{quote}
+
+\begin{quote}
+\(J(\theta) = \frac{1}{2m} |X\theta - y|_2\)
+\end{quote}
+
+    2.Write down an expression for the gradient of J.
+
+    \begin{quote}
+\textbf{ANSWER}:
+\end{quote}
+
+\begin{quote}
+\(\nabla_{\theta}J(\theta)\)
+\end{quote}
+
+\begin{quote}
+\(= \frac{\partial(\frac{1}{2m}(X\theta-y)^T(X\theta-y))}{\partial(X\theta-y)} \frac{\partial(X\theta-y)}{\partial\theta}\)
+\end{quote}
+
+\begin{quote}
+\(=\frac{1}{m}(X\theta-y)^T X\)
+\end{quote}
+
+    3.Use the gradient to write down an approximate expression for
+\(J(\theta+\eta\Delta)-J(\theta)\)
+
+    \begin{quote}
+\textbf{ANSWER}:
+\end{quote}
+
+\begin{quote}
+The gradient at point \(\theta\) is the best linear approximation of
+\(J\) at that point.
+\end{quote}
+
+\begin{quote}
+\(J(\theta+\eta\Delta)-J(\theta) \approx \nabla J(\theta)\Delta\eta\)
+\end{quote}
+
+    4.Write down the expression for updating \(\theta\) in the gradient
+descent algorithm. Let \(\eta\) be the step size.
+
+    \begin{quote}
+\textbf{ANSWER:}
+\end{quote}
+
+\begin{quote}
+\(\theta_{i+1} = \theta_i-\eta\nabla_{\theta}J\)
+\end{quote}
+
+    5.Modify the function \texttt{compute\_square\_loss}, to compute
+\(J(\theta)\) for a given \(\theta\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}Q2.2a: The square loss function}
+        
+        \PY{k}{def} \PY{n+nf}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Given a set of X, y, theta, compute the square loss for predicting y with X*theta}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        X \PYZhy{} the feature vector, 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+        \PY{l+s+sd}{        y \PYZhy{} the label vector, 1D numpy array of size (num\PYZus{}instances)}
+        \PY{l+s+sd}{        theta \PYZhy{} the parameter vector, 1D array of size (num\PYZus{}features)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        loss \PYZhy{} the square loss, scalar}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{loss} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y}
+            \PY{k}{return} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{loss} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+    6.Create a small dataset for which you can compute \(J(\theta)\) by
+hand, and verify that your \texttt{compute\_square\_loss} function
+returns the correct value.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{k}{print} \PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+115.663742555
+    \end{Verbatim}
+
+    7.Modify the function \texttt{compute\_square\_loss\_gradient}, to
+compute \(\nabla_{\theta}J(\theta)\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}Q2.2b: compute the gradient of square loss function}
+        \PY{k}{def} \PY{n+nf}{compute\PYZus{}square\PYZus{}loss\PYZus{}gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Compute gradient of the square loss (as defined in compute\PYZus{}square\PYZus{}loss), at the point theta.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        X \PYZhy{} the feature vector, 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+        \PY{l+s+sd}{        y \PYZhy{} the label vector, 1D numpy array of size (num\PYZus{}instances)}
+        \PY{l+s+sd}{        theta \PYZhy{} the parameter vector, 1D numpy array of size (num\PYZus{}features)}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        grad \PYZhy{} gradient vector, 1D numpy array of size (num\PYZus{}features)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{m} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{loss} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{y}
+            \PY{k}{return} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{m}\PY{o}{+}\PY{l+m+mf}{0.0}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{loss}\PY{p}{)}
+\end{Verbatim}
+
+    8.Create a small dataset, verify that your
+\texttt{compute\_square\_loss\_gradient} function returns the correct
+value.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{c}{\PYZsh{}print compute\PYZus{}square\PYZus{}loss\PYZus{}gradient(X\PYZus{}train, y\PYZus{}train, theta)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{X\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{y\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{theta\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{k}{print} \PY{n}{compute\PYZus{}square\PYZus{}loss\PYZus{}gradient}\PY{p}{(}\PY{n}{X\PYZus{}new}\PY{p}{,} \PY{n}{y\PYZus{}new}\PY{p}{,} \PY{n}{theta\PYZus{}new}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.11544333]
+ [ 0.10037056]
+ [-0.02513624]]
+    \end{Verbatim}
+
+    \subsection{2.3 Gradient Checker}\label{gradient-checker}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}Q2.3a: Gradient Checker}
+         \PY{c}{\PYZsh{}Getting the gradient calculation correct is often the trickiest part}
+         \PY{c}{\PYZsh{}of any gradient\PYZhy{}based optimization algorithm.  Fortunately, it\PYZsq{}s very}
+         \PY{c}{\PYZsh{}easy to check that the gradient calculation is correct using the}
+         \PY{c}{\PYZsh{}definition of gradient.}
+         \PY{c}{\PYZsh{}See http://ufldl.stanford.edu/wiki/index.php/Gradient\PYZus{}checking\PYZus{}and\PYZus{}advanced\PYZus{}optimization}
+         \PY{k}{def} \PY{n+nf}{grad\PYZus{}checker}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{epsilon}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{tolerance}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{p}{:} 
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Implement Gradient Checker}
+         \PY{l+s+sd}{    Check that the function compute\PYZus{}square\PYZus{}loss\PYZus{}gradient returns the}
+         \PY{l+s+sd}{    correct gradient for the given X, y, and theta.}
+         
+         \PY{l+s+sd}{    Let d be the number of features. Here we numerically estimate the}
+         \PY{l+s+sd}{    gradient by approximating the directional derivative in each of}
+         \PY{l+s+sd}{    the d coordinate directions: }
+         \PY{l+s+sd}{    (e\PYZus{}1 = (1,0,0,...,0), e\PYZus{}2 = (0,1,0,...,0), ..., e\PYZus{}d = (0,...,0,1) }
+         
+         \PY{l+s+sd}{    The approximation for the directional derivative of J at the point}
+         \PY{l+s+sd}{    theta in the direction e\PYZus{}i is given by: }
+         \PY{l+s+sd}{    ( J(theta + epsilon * e\PYZus{}i) \PYZhy{} J(theta \PYZhy{} epsilon * e\PYZus{}i) ) / (2*epsilon).}
+         
+         \PY{l+s+sd}{    We then look at the Euclidean distance between the gradient}
+         \PY{l+s+sd}{    computed using this approximation and the gradient computed by}
+         \PY{l+s+sd}{    compute\PYZus{}square\PYZus{}loss\PYZus{}gradient(X, y, theta).  If the Euclidean}
+         \PY{l+s+sd}{    distance exceeds tolerance, we say the gradient is incorrect.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        X \PYZhy{} the feature vector, 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+         \PY{l+s+sd}{        y \PYZhy{} the label vector, 1D numpy array of size (num\PYZus{}instances)}
+         \PY{l+s+sd}{        theta \PYZhy{} the parameter vector, 1D numpy array of size (num\PYZus{}features)}
+         \PY{l+s+sd}{        epsilon \PYZhy{} the epsilon used in approximation}
+         \PY{l+s+sd}{        tolerance \PYZhy{} the tolerance error}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Return:}
+         \PY{l+s+sd}{        A boolean value indicate whether the gradient is correct or not}
+         
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{true\PYZus{}gradient} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss\PYZus{}gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)} \PY{c}{\PYZsh{}the true gradient}
+             \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{theta}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{approx\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)} \PY{c}{\PYZsh{}Initialize the gradient we approximate}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{e\PYZus{}i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)}
+                 \PY{n}{e\PYZus{}i}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{approx\PYZus{}grad}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta} \PY{o}{+} \PY{n}{epsilon} \PY{o}{*}\PY{n}{e\PYZus{}i}\PY{p}{)} \PY{o}{\PYZhy{}} 
+                                   \PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta} \PY{o}{+} \PY{n}{epsilon} \PY{o}{*}\PY{n}{e\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{tolerance}\PY{o}{+}\PY{l+m+mf}{0.0}\PY{p}{)}
+             \PY{n}{dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{approx\PYZus{}grad}\PY{o}{\PYZhy{}}\PY{n}{true\PYZus{}gradient}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{correct\PYZus{}grad} \PY{o}{=} \PY{n}{dist}\PY{o}{\PYZlt{}}\PY{n}{tolerance}
+             \PY{k}{assert} \PY{n}{correct\PYZus{}grad}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Gradient bad: dist }\PY{l+s+si}{\PYZpc{}s}\PY{l+s}{ is greater than tolerance }\PY{l+s+si}{\PYZpc{}s}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{dist}\PY{p}{,}\PY{n}{tolerance}\PY{p}{)}
+             \PY{k}{return} \PY{n}{correct\PYZus{}grad}
+\end{Verbatim}
+
+    2.Write a generic version of \texttt{grad\_checker} that will work for
+any objective function. It should take as parameters a function that
+computes the gradient of the pbjective function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}Q2.3b: Generic Gradient Checker}
+         \PY{k}{def} \PY{n+nf}{generic\PYZus{}gradient\PYZus{}checker}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{objective\PYZus{}func}\PY{p}{,} \PY{n}{gradient\PYZus{}func}\PY{p}{,} \PY{n}{epsilon}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{tolerance}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    The functions takes objective\PYZus{}func and gradient\PYZus{}func as parameters. And check whether gradient\PYZus{}func(X, y, theta) returned}
+         \PY{l+s+sd}{    the true gradient for objective\PYZus{}func(X, y, theta).}
+         \PY{l+s+sd}{    Eg: In LSR, the objective\PYZus{}func = compute\PYZus{}square\PYZus{}loss, and gradient\PYZus{}func = compute\PYZus{}square\PYZus{}loss\PYZus{}gradient}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{true\PYZus{}gradient} \PY{o}{=} \PY{n}{gradient\PYZus{}func}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)} \PY{c}{\PYZsh{}the true gradient}
+             \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{theta}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{approx\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)} \PY{c}{\PYZsh{}Initialize the gradient we approximate}
+             
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{e\PYZus{}i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)}
+                 \PY{n}{e\PYZus{}i}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{approx\PYZus{}grad}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{objective\PYZus{}func}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta} \PY{o}{+} \PY{n}{epsilon} \PY{o}{*}\PY{n}{e\PYZus{}i}\PY{p}{)} \PY{o}{\PYZhy{}} 
+                                   \PY{n}{objective\PYZus{}func}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta} \PY{o}{+} \PY{n}{epsilon} \PY{o}{*}\PY{n}{e\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{tolerance}\PY{o}{+}\PY{l+m+mf}{0.0}\PY{p}{)}
+             \PY{n}{dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{approx\PYZus{}grad}\PY{o}{\PYZhy{}}\PY{n}{true\PYZus{}gradient}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{correct\PYZus{}grad} \PY{o}{=} \PY{n}{dist}\PY{o}{\PYZlt{}}\PY{n}{tolerance}
+             \PY{k}{assert} \PY{n}{correct\PYZus{}grad}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Gradient bad: dist }\PY{l+s+si}{\PYZpc{}s}\PY{l+s}{ is greater than tolerance }\PY{l+s+si}{\PYZpc{}s}\PY{l+s}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{dist}\PY{p}{,}\PY{n}{tolerance}\PY{p}{)}
+             \PY{k}{return} \PY{n}{correct\PYZus{}grad}
+\end{Verbatim}
+
+    \subsection{2.4 Batch Gradient Descent}\label{batch-gradient-descent}
+
+    1.Complete \texttt{batch\_gradient\_descent}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}Q2.4a: Batch Gradient Descent}
+         \PY{k}{def} \PY{n+nf}{batch\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{num\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{check\PYZus{}gradient}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    In this question you will implement batch gradient descent to}
+         \PY{l+s+sd}{    minimize the square loss objective}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        X \PYZhy{} the feature vector, 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+         \PY{l+s+sd}{        y \PYZhy{} the label vector, 1D numpy array of size (num\PYZus{}instances)}
+         \PY{l+s+sd}{        alpha \PYZhy{} step size in gradient descent}
+         \PY{l+s+sd}{        num\PYZus{}iter \PYZhy{} number of iterations to run }
+         \PY{l+s+sd}{        check\PYZus{}gradient \PYZhy{} a boolean value indicating whether checking the gradient when updating}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        theta\PYZus{}hist \PYZhy{} store the the history of parameter vector in iteration, 2D numpy array of size (num\PYZus{}iter+1, num\PYZus{}features) }
+         \PY{l+s+sd}{                    for instance, theta in iteration 0 should be theta\PYZus{}hist[0], theta in ieration (num\PYZus{}iter) is theta\PYZus{}hist[\PYZhy{}1]}
+         \PY{l+s+sd}{        loss\PYZus{}hist \PYZhy{} the history of objective function vector, 1D numpy array of size (num\PYZus{}iter+1) }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{num\PYZus{}instances}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)} \PY{c}{\PYZsh{}initialize theta}
+             \PY{n}{theta\PYZus{}hist} \PY{o}{=} \PY{n}{theta} \PY{c}{\PYZsh{}Initialize theta\PYZus{}hist}
+             \PY{n}{loss\PYZus{}hist} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{c}{\PYZsh{}initialize loss\PYZus{}hist}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{check\PYZus{}gradient}\PY{p}{:}
+                     \PY{n}{grad} \PY{o}{=} \PY{n}{grad\PYZus{}checker}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+                     \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Grade check:\PYZob{}0\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{grad}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{grad} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss\PYZus{}gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                 \PY{n}{theta} \PY{o}{=} \PY{n}{theta} \PY{o}{\PYZhy{}} \PY{n}{alpha}\PY{o}{*}\PY{n}{grad}\PY{o}{.}\PY{n}{T}
+                 \PY{n}{theta\PYZus{}hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{theta\PYZus{}hist}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{loss} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                 \PY{n}{loss\PYZus{}hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{loss\PYZus{}hist}\PY{p}{,} \PY{n}{loss}\PY{p}{)}\PY{p}{)}
+                 
+             \PY{k}{return} \PY{n}{loss\PYZus{}hist}\PY{p}{,}\PY{n}{theta\PYZus{}hist}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{X} \PY{o}{=} \PY{n}{X\PYZus{}train}
+         \PY{n}{y} \PY{o}{=} \PY{n}{y\PYZus{}train}
+         \PY{n}{loss\PYZus{}return}\PY{p}{,} \PY{n}{theta\PYZus{}return} \PY{o}{=} \PY{n}{batch\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{loss\PYZus{}return}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} array([[ 441.43426102],
+                [ 285.54947422],
+                [ 185.24897342],
+                {\ldots}, 
+                [   1.86585135],
+                [   1.86503146],
+                [   1.86421264]])
+\end{Verbatim}
+        
+    2.Try step sizes 0.5, 0.1, 0.05, 0.01. Plot the value of the objective
+function as a function of the number of steps for each step sizes.
+Briefly summarize your findings.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{num\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{k}{def} \PY{n+nf}{converge\PYZus{}test}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{n}{step\PYZus{}sizes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.101}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{step\PYZus{}size} \PY{o+ow}{in} \PY{n}{step\PYZus{}sizes}\PY{p}{:}
+                 \PY{n}{loss\PYZus{}hist}\PY{p}{,}\PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{batch\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{n}{step\PYZus{}size}\PY{p}{,} \PY{n}{num\PYZus{}iter}\PY{o}{=}\PY{n}{num\PYZus{}iter}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{loss\PYZus{}hist}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{step\PYZus{}size}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Steps}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Loss}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{yscale}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{log}\PY{l+s}{\PYZsq{}}\PY{p}{)}    
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Convergence Rates by Step Size}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             
+         \PY{n}{converge\PYZus{}test}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{hw1_files/hw1_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    3.(Option)backtracking line search
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}Q2.4b: Implement backtracking line search in batch\PYZus{}gradient\PYZus{}descent}
+         \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}Check http://en.wikipedia.org/wiki/Backtracking\PYZus{}line\PYZus{}search for details}
+         \PY{c}{\PYZsh{}TODO}
+\end{Verbatim}
+
+    \subsection{2.5 Ridge Regression}\label{ridge-regression}
+
+    1.Compute the gradient of \(J(\theta)\) and write down the expression
+for updating \(\theta\) in the gradient descent algprithm
+
+    \begin{quote}
+\textbf{ANSWER}:
+\end{quote}
+
+\begin{quote}
+\(\nabla_{\theta}J(\theta)=\frac{1}{m}(X\theta-y)^T X +2\lambda\theta\)
+\end{quote}
+
+    2.Implement \texttt{compute\_regularized\_square\_loss\_gradient}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{compute\PYZus{}regularized\PYZus{}square\PYZus{}loss\PYZus{}gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{lambda\PYZus{}reg}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute gradient of the square loss (as defined in compute\PYZus{}square\PYZus{}loss), at the point theta.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        X \PYZhy{} the feature vector, 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+         \PY{l+s+sd}{        y \PYZhy{} the label vector, 1D numpy array of size (num\PYZus{}instances)}
+         \PY{l+s+sd}{        theta \PYZhy{} the parameter vector, 1D numpy array of size (num\PYZus{}features)}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        grad \PYZhy{} gradient vector, 1D numpy array of size (num\PYZus{}features)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{regularization\PYZus{}term} \PY{o}{=} \PY{l+m+mf}{2.0} \PY{o}{*} \PY{n}{lambda\PYZus{}reg} \PY{o}{*} \PY{n}{theta}
+             
+             \PY{n}{grad} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss\PYZus{}gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)} \PY{o}{+} \PY{n}{regularization\PYZus{}term}
+             \PY{k}{return} \PY{n}{grad}
+\end{Verbatim}
+
+    3.Implement \texttt{regularized\_grad\_descent}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}Q2.5b: Batch Gradient Descent with regularization term}
+         \PY{k}{def} \PY{n+nf}{regularized\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{lambda\PYZus{}reg}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        X \PYZhy{} the feature vector, 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+         \PY{l+s+sd}{        y \PYZhy{} the label vector, 1D numpy array of size (num\PYZus{}instances)}
+         \PY{l+s+sd}{        alpha \PYZhy{} step size in gradient descent}
+         \PY{l+s+sd}{        lambda\PYZus{}reg \PYZhy{} the regularization coefficient}
+         \PY{l+s+sd}{        numIter \PYZhy{} number of iterations to run }
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        theta\PYZus{}hist \PYZhy{} the history of parameter vector, 2D numpy array of size (num\PYZus{}iter+1, num\PYZus{}features) }
+         \PY{l+s+sd}{        loss\PYZus{}hist \PYZhy{} the history of regularized loss value, 1D numpy array}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{p}{(}\PY{n}{num\PYZus{}instances}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{p}{)} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)}  \PY{c}{\PYZsh{} Initialize theta}
+             \PY{n}{theta\PYZus{}hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}iter} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{p}{)}\PY{p}{)}  \PY{c}{\PYZsh{} Initialize theta\PYZus{}hist}
+             \PY{n}{loss\PYZus{}hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}iter} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}  \PY{c}{\PYZsh{} Initialize loss\PYZus{}hist}
+         
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iter} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{loss\PYZus{}hist}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)} \PY{o}{+} \PY{n}{lambda\PYZus{}reg} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{theta} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{theta\PYZus{}hist}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{theta}
+         
+                 \PY{n}{grad} \PY{o}{=} \PY{n}{compute\PYZus{}regularized\PYZus{}square\PYZus{}loss\PYZus{}gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{lambda\PYZus{}reg}\PY{p}{)}
+                 \PY{c}{\PYZsh{}theta = theta \PYZhy{} alpha * grad/np.linalg.norm(grad)}
+                 \PY{n}{theta} \PY{o}{=} \PY{n}{theta} \PY{o}{\PYZhy{}} \PY{n}{alpha} \PY{o}{*} \PY{n}{grad}
+             
+             \PY{k}{return} \PY{n}{loss\PYZus{}hist}\PY{p}{,}\PY{n}{theta\PYZus{}hist}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{loss}\PY{p}{,} \PY{n}{theta} \PY{o}{=} \PY{n}{regularized\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{loss}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} array([ 490.43426102,  303.0924192 ,  188.40878738, {\ldots},    3.82298295,
+                   3.82298295,    3.82298295])
+\end{Verbatim}
+        
+    4.Explain why making B large decreases the effective regulatization on
+the bias term, and how we can make that regularization as weak as we
+like(though not zero)
+
+    \begin{quote}
+\textbf{ANSWER:}
+\end{quote}
+
+\begin{quote}
+The gradient descent algorithm seeks to minimize the loss function by
+driving the coeffecient of the linear function, i.e.
+\(B\rightarrow\infty, \theta_{bias}\rightarrow0\). So using a large B
+will decrease the impact of regulation \(\lambda\) on the coeffecient of
+the bias term.
+\end{quote}
+
+    5.Choose a reasonable step size. Plot the training loss and the
+validation loss(without the regulation) as a function of \(\lambda\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c}{\PYZsh{}\PYZsh{}Q2.5c: Visualization of Regularized Batch Gradient Descent}
+         \PY{c}{\PYZsh{}\PYZsh{}X\PYZhy{}axis: log(lambda\PYZus{}reg)}
+         \PY{c}{\PYZsh{}\PYZsh{}Y\PYZhy{}axis: square\PYZus{}loss}
+         \PY{k}{def} \PY{n+nf}{vis\PYZus{}regularized\PYZus{}batch\PYZus{}gradient\PYZus{}descent}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{lambdas}\PY{p}{)}\PY{p}{:}
+             \PY{n}{stepSize} \PY{o}{=} \PY{l+m+mf}{0.00001}
+             \PY{n}{train\PYZus{}error} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{lambdas}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{validation\PYZus{}error} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{lambdas}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{lamb} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{lambdas}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{losses}\PY{p}{,} \PY{n}{thetas} \PY{o}{=} \PY{n}{regularized\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{stepSize}\PY{p}{,} \PY{n}{lambda\PYZus{}reg}\PY{o}{=}\PY{n}{lamb}\PY{p}{,} \PY{n}{num\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+                 \PY{n}{train\PYZus{}error}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{thetas}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{validation\PYZus{}error}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{compute\PYZus{}square\PYZus{}loss}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{thetas}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Min lambda: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{lambdas}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{validation\PYZus{}error}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Min training error: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}error}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Min validation error: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{validation\PYZus{}error}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lambdas}\PY{p}{)}\PY{p}{,} \PY{n}{train\PYZus{}error}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Training error}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lambdas}\PY{p}{)}\PY{p}{,} \PY{n}{validation\PYZus{}error}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Validation Error}\PY{l+s}{\PYZdq{}} \PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lambda (log)}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Error}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c}{\PYZsh{}lambdas = np.array([1e\PYZhy{}7, 1e\PYZhy{}5, 1e\PYZhy{}3, 1e\PYZhy{}1, 1, 10, 100,1000])}
+         \PY{n}{lambdas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{8} \PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{n}{vis\PYZus{}regularized\PYZus{}batch\PYZus{}gradient\PYZus{}descent}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{lambdas}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Min lambda: 7.75
+Min training error: 4.09907511755
+Min validation error: 2.35093006421
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{hw1_files/hw1_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{2.6 Stochastic Gradient
+Descent}\label{stochastic-gradient-descent}
+
+    1.Write down the update rule for \$\theta \$ in SGD.
+
+    \begin{quote}
+\textbf{ANSWER}:
+\end{quote}
+
+\begin{quote}
+\(\theta_{t+1}=\theta_t - \eta\nabla_{\theta}\frac{1}{2}(h_{\theta}(x_i)-y_i)\)
+\end{quote}
+
+\begin{quote}
+where \((x_i,y_i)\) is randomly chosen porint.
+\end{quote}
+
+    2.Implement \texttt{stochastic\_grad\_descent}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c}{\PYZsh{} \PYZsh{}\PYZsh{}Q2.6a: Stochastic Gradient Descent}
+         \PY{k}{def} \PY{n+nf}{stochastic\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{lambda\PYZus{}reg}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    In this question you will implement stochastic gradient descent with a regularization term}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        X \PYZhy{} the feature vector, 2D numpy array of size (num\PYZus{}instances, num\PYZus{}features)}
+         \PY{l+s+sd}{        y \PYZhy{} the label vector, 1D numpy array of size (num\PYZus{}instances)}
+         \PY{l+s+sd}{        alpha \PYZhy{} string or float. step size in gradient descent}
+         \PY{l+s+sd}{                NOTE: In SGD, it\PYZsq{}s not always a good idea to use a fixed step size. Usually it\PYZsq{}s set to 1/sqrt(t) or 1/t}
+         \PY{l+s+sd}{                if alpha is a float, then the step size in every iteration is alpha.}
+         \PY{l+s+sd}{                if alpha == \PYZdq{}1/sqrt(t)\PYZdq{}, alpha = 1/sqrt(t)}
+         \PY{l+s+sd}{                if alpha == \PYZdq{}1/t\PYZdq{}, alpha = 1/t}
+         \PY{l+s+sd}{        lambda\PYZus{}reg \PYZhy{} the regularization coefficient}
+         \PY{l+s+sd}{        num\PYZus{}iter \PYZhy{} number of epochs (i.e number of times) to go through the whole training set}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        theta\PYZus{}hist \PYZhy{} the history of parameter vector, 3D numpy array of size (num\PYZus{}iter, num\PYZus{}instances, num\PYZus{}features) }
+         \PY{l+s+sd}{        loss hist \PYZhy{} the history of regularized loss function vector, 2D numpy array of size(num\PYZus{}iter, num\PYZus{}instances)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{num\PYZus{}instances}\PY{p}{,} \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)}  \PY{c}{\PYZsh{} Initialize theta}
+             
+             
+             \PY{n}{theta\PYZus{}hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}iter}\PY{p}{,} \PY{n}{num\PYZus{}instances}\PY{p}{,} \PY{n}{num\PYZus{}features}\PY{p}{)}\PY{p}{)}  \PY{c}{\PYZsh{} Initialize theta\PYZus{}hist}
+             \PY{n}{loss\PYZus{}hist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}iter}\PY{p}{,} \PY{n}{num\PYZus{}instances}\PY{p}{)}\PY{p}{)}  \PY{c}{\PYZsh{} Initialize loss\PYZus{}hist}
+             \PY{c}{\PYZsh{} TODO}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n+nb}{str}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{alpha} \PY{o}{==} \PY{l+s}{\PYZsq{}}\PY{l+s}{1/t}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+m+mf}{1.0} \PY{o}{/} \PY{n}{x}
+                 \PY{k}{elif} \PY{n}{alpha} \PY{o}{==} \PY{l+s}{\PYZsq{}}\PY{l+s}{1/sqrt(t)}\PY{l+s}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+m+mf}{1.0} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+             \PY{k}{elif} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n+nb}{float}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+m+mi}{1}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return}
+         
+             \PY{n}{t0} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                 
+                 
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}instances}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{gamma\PYZus{}t} \PY{o}{=} \PY{n}{alpha} \PY{o}{*} \PY{n}{f}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+                     \PY{n}{theta\PYZus{}hist}\PY{p}{[}\PY{n}{t} \PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{theta}
+                     \PY{c}{\PYZsh{} compute loss for current theta}
+                     \PY{n}{loss} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{theta}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                     \PY{c}{\PYZsh{} reg. term}
+                     \PY{n}{regulariztion\PYZus{}loss} \PY{o}{=} \PY{n}{lambda\PYZus{}reg} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{theta}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{theta}\PY{p}{)}
+                     \PY{c}{\PYZsh{} squared loss}
+                     \PY{n}{loss\PYZus{}hist}\PY{p}{[}\PY{n}{t}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{loss}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{n}{regulariztion\PYZus{}loss} 
+                     
+                     \PY{n}{regularization\PYZus{}penalty} \PY{o}{=} \PY{l+m+mf}{2.0} \PY{o}{*} \PY{n}{lambda\PYZus{}reg} \PY{o}{*} \PY{n}{theta} 
+                     \PY{n}{grad} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{loss}\PY{p}{)} \PY{o}{+} \PY{n}{regularization\PYZus{}penalty}
+                     \PY{n}{theta} \PY{o}{=} \PY{n}{theta} \PY{o}{\PYZhy{}} \PY{n}{gamma\PYZus{}t} \PY{o}{*} \PY{n}{grad}
+                                 
+             \PY{n}{t1} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Average time per epoch:: }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n}{t1} \PY{o}{\PYZhy{}} \PY{n}{t0}\PY{p}{)} \PY{o}{/} \PY{n}{num\PYZus{}iter}\PY{p}{)} 
+             \PY{k}{return} \PY{n}{theta\PYZus{}hist}\PY{p}{,} \PY{n}{loss\PYZus{}hist}
+\end{Verbatim}
+
+    3.Use SDG to find \(\theta_{\lambda}^*\) that minimizes the ridge
+regression objective for the \(\lambda\) and \(B\) that you selected in
+the previous problem. Try a few fixed step sizes (at least try
+\(\eta_t \in {0.05,.005}\)). Note that SGD may not converge with fixed
+step size. Simply note your results. Next try step sizes that decrease
+with thes step number according to the following schedules:
+\(\eta_t = \frac{1}{t}\) and \(\eta_t = \frac{1}{\sqrt{t}}\). For each
+step size rule, plot the value of the objective function as a function
+of epoch for each of the approaches to step size. How do the results
+compare?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k}{def} \PY{n+nf}{convergence\PYZus{}tests\PYZus{}batch\PYZus{}vs\PYZus{}stochastic}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{n}{alphas} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{1/t}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{1/sqrt(t)}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+m+mf}{0.0005}\PY{p}{,}\PY{l+m+mf}{0.001}\PY{p}{]}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{alpha} \PY{o+ow}{in} \PY{n}{alphas}\PY{p}{:}
+                 \PY{p}{[}\PY{n}{thetas}\PY{p}{,}\PY{n}{losses}\PY{p}{]} \PY{o}{=} \PY{n}{stochastic\PYZus{}grad\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{l+m+mf}{5.67}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{losses}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Alpha:}\PY{l+s}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{)}
+                 
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{convergence\PYZus{}tests\PYZus{}batch\PYZus{}vs\PYZus{}stochastic}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Average time per epoch:: 0.000810813903809
+Average time per epoch:: 0.000934219360352
+Average time per epoch:: 0.00155262947083
+Average time per epoch:: 0.00154900550842
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{hw1_files/hw1_55_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}Q2.6b Visualization that compares the convergence speed of batch}
+        \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{}and stochastic gradient descent for various approaches to step\PYZus{}size}
+        \PY{c}{\PYZsh{}\PYZsh{}X\PYZhy{}axis: Step number (for gradient descent) or Epoch (for SGD)}
+        \PY{c}{\PYZsh{}\PYZsh{}Y\PYZhy{}axis: log(objective\PYZus{}function\PYZus{}value)}
+\end{Verbatim}
+
+    \subsection{3.Risk Minimization}\label{risk-minimization}
+
+    1.Show that for the square loss
+\(\ell(\hat y-y)=\frac{1}{2}(y-\hat y)^2\), the Bayes decision function
+is a \(f^*(x)=\mathbb{E}[Y |X=x]\)
+
+    \(R(f)\)
+
+\(=\frac{1}{2}\mathbb{E}[(f(x)-y)^2]\)
+
+\(=\frac{1}{2}\mathbb{E}[(y-\hat y)^2|x]\)
+
+\(=\frac{1}{2}\mathbb{E}[(y^2-2y\hat y+\hat y^2)|x]\)
+
+\(=\frac{1}{2}(\mathbb{E}[y^2|x]-2\mathbb{E}[y|x]+\hat y^2)\)
+
+Hence,
+
+\(\frac{\partial R(f)}{\partial \hat y}=2\hat y - 2\mathbb{E}[y|x]\)
+
+\(\hat y = \mathbb{E}[y|x]\)
+
+    2.Show that for the absolute loss \(\ell(\hat y,y)=|y-\hat y|\), the
+Bayes function is a \(f^*(x)=median[Y|X=x].\)
+
+    \(R(f)\)
+
+\(=\mathbb{E}[|y-\hat y||x]\)
+
+\(=\int |y-\hat y|\pi(y|x)dy\)
+
+\(=\int_{y\leq\hat y}(\hat y-y)\pi(y|x)dy+\int_{y\geq\hat y}(y-\hat y)\pi(y|x)dy\)
+
+\(\frac{\partial R(f)}{\partial \hat y}\)
+
+\(= -\int_{y \geq \hat{y}}\pi(y|x)dy + (\hat{y}-\hat{y})(1)-(\hat{y}-y^+)(0) +\int_{y\leq \hat{y}}\pi(y|x)dy + (y^- - \hat{y})(0)- (\hat{y}-\hat{y})(1)\)
+
+\(=-\int_{y \geq \hat{y}}\pi(y|x)dy +\int_{y\leq \hat{y}}\pi(y|x)dy =0\)
+
+Hence,
+
+\(P(y\geq\hat{y}) = P(y\leq \hat{y})\)
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

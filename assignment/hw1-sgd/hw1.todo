@@ -1,0 +1,45 @@
+problems:
+  2.1 Feature Normalization: 
+  2.2 Gradien Descent Setup: 
+  2.3 Gradient Checker:
+  2.4 Batch Gradient Descent:
+    ☐ 3 @created(16-01-29 16:07) @optional
+  2.5 Ridge Regression:
+    ☐ 5 @created(16-01-29 16:08) @started(16-01-30 18:23) @toggle(16-01-30 19:06)
+    ☐ 6 @created(16-01-29 16:08) @optional
+    ☐ 7 @created(16-01-29 16:08) @optional
+    ☐ 8 @created(16-01-29 16:08)
+  2.6 Stochastic Gradient Descent:
+    ✔ 2 @created(16-01-29 16:09) @started(16-01-30 16:38) @done (16-01-30 16:53) @lasted(0:15)
+    ☐ 3 @created(16-01-29 16:09) @started(16-01-30 17:51) @toggle(16-01-30 18:11)
+    ☐ 4 @created(16-01-29 16:09)
+    ☐ 5 @created(16-01-29 16:09)
+    ☐ 6 @created(16-01-29 16:09)
+  3 Risk Minimization:
+    ☐ 1 @created(16-01-29 16:09)
+    ☐ 2 @created(16-01-29 16:09)
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+ ✔ 1 @created(16-01-29 16:09) @started(16-01-30 12:11)  @done (16-01-30 12:30) @lasted(0:19) @project(problems / 2.6 Stochastic Gradient Descent)
+ ✔ 2 @created(16-01-29 16:07) @started(16-01-29 20:31) @toggle(16-01-29 21:03) @toggle-resume(16-01-30 01:56) @done (16-01-30 02:03) @lasted(0:32) @project(problems / 2.4 Batch Gradient Descent)
+ ✔ 1 @created(16-01-29 16:08) @done (16-01-30 12:03) @project(problems / 2.5 Ridge Regression)
+ ✔ 2 @created(16-01-29 16:08) @done (16-01-30 12:03) @project(problems / 2.5 Ridge Regression)
+ ✔ 3 @created(16-01-29 16:08) @done (16-01-30 12:03) @project(problems / 2.5 Ridge Regression)
+ ✔ 4 @created(16-01-29 16:08) @done (16-01-30 12:03) @project(problems / 2.5 Ridge Regression)
+ ✔ 1 @created(16-01-29 16:07) @started(16-01-29 19:26) @toggle(16-01-29 19:59) @toggle-resume(16-01-29 20:00) @done (16-01-29 20:27) @lasted(0:33) @project(problems / 2.4 Batch Gradient Descent)
+ ✔ 2 @created(16-01-29 16:07) @started(16-01-29 19:22)  @done (16-01-29 19:22) @lasted(a bit) @project(problems / 2.3 Gradient Checker)
+  task
+
+ ✔ 1 @created(16-01-29 16:07) @started(16-01-29 18:55)  @done (16-01-29 19:19) @lasted(0:24) @problem(tolerence exit) @project(problems / 2.3 Gradient Checker)
+ ✔ 8 @created(16-01-29 16:07) @started(16-01-29 17:42)  @done (16-01-29 17:42) @lasted(a bit) @project(problems / 2.2 Gradien Descent Setup)
+  $Normalization
+ ✔ 7 @created(16-01-29 16:07) @started(16-01-29 17:42)  @done (16-01-29 17:42) @lasted(a bit) @project(problems / 2.2 Gradien Descent Setup)
+ ✔ 6 @created(16-01-29 16:07) @started(16-01-29 17:28)  @done (16-01-29 17:42) @lasted(0:14) @project(problems / 2.2 Gradien Descent Setup)
+ ✔ 5 @created(16-01-29 16:07) @started(16-01-29 17:23) @done (16-01-29 17:28) @lasted(0:05) @project(problems / 2.2 Gradien Descent Setup)
+ ✔ 4 @created(16-01-29 16:07) @started(16-01-29 17:17)  @done (16-01-29 17:17) @lasted(a bit) @project(problems / 2.2 Gradien Descent Setup)
+ ✔ 3 @created(16-01-29 16:07) @started(16-01-29 17:00)  @done (16-01-29 17:12) @lasted(0:12) @project(problems / 2.2 Gradien Descent Setup)
+ ✔ 2 @created(16-01-29 16:07) @started(16-01-29 16:23) @done (16-01-29 16:35) @lasted(0:12) @project(problems / 2.2 Gradien Descent Setup)
+ ✔ 1 @created(16-01-29 16:06) @started(16-01-29 16:11)  @done (16-01-29 16:20) @lasted(0:09) @project(problems / 2.2 Gradien Descent Setup)
+ ✔ 1 @started(16-01-29 15:57) @done (16-01-29 16:02) @lasted(0:05) @project(problems / 2.1 Feature Normalization)
